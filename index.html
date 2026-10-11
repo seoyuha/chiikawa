@@ -64,23 +64,32 @@ button.sign{pointer-events:auto;cursor:pointer}
 
 /* ---------- 장면 ---------- */
 .sceneOv{display:flex;flex-direction:column;background:#0b2335}
-.sceneVis{position:relative;min-height:clamp(290px,52vh,560px);background:center/cover}
+.sceneVis{position:relative;height:clamp(300px,54vh,580px);overflow:hidden;background:center/cover}
 .sceneVis:after{content:'';position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#122a4080);pointer-events:none}
 .sceneName{position:absolute;top:12px;left:12px;background:#ffffffe6;border:2px solid #fff;padding:8px 13px;border-radius:13px;font-weight:900;z-index:3}
-.signpost{transition:opacity .5s,transform .5s}
-.signpost .plank{position:relative;background:linear-gradient(#cb9d64,#ab7a42);border:3px solid #7c5630;border-radius:11px;box-shadow:0 6px 16px #192e3d66,inset 0 2px 0 #e6c08a,inset 0 -3px 0 #8a6134;color:#fff8ec;font-weight:900;text-shadow:0 2px 2px #00000066;padding:13px 26px;font-size:clamp(15px,2.3vw,23px);line-height:1.45}
+.signpost{transition:opacity .45s,transform .45s}
+.signpost .plank{position:relative;background:linear-gradient(#cb9d64,#ab7a42);border:3px solid #7c5630;border-radius:11px;box-shadow:0 6px 16px #192e3d66,inset 0 2px 0 #e6c08a,inset 0 -3px 0 #8a6134;color:#fff8ec;font-weight:900;text-shadow:0 2px 2px #00000066;padding:12px 24px;font-size:clamp(15px,2.3vw,22px);line-height:1.45}
 .signpost .plank:before,.signpost .plank:after{content:'';position:absolute;top:9px;width:9px;height:9px;border-radius:50%;background:#5e3f20;box-shadow:inset 0 2px 2px #00000077}
 .signpost .plank:before{left:9px}.signpost .plank:after{right:9px}
-.signpost .pole{width:13px;height:44px;margin:-2px auto 0;background:linear-gradient(90deg,#9a6c3a,#6e4b26);border:2px solid #5e3f20;border-top:0;border-radius:0 0 6px 6px}
-.signpost.scene{position:absolute;z-index:4;top:9%;left:6%;max-width:72%;transform:rotate(-2deg)}
-.signpost.map{margin:2px auto 0;width:fit-content;max-width:96%}
+.signpost .pole{width:13px;height:30px;margin:-2px auto 0;background:linear-gradient(90deg,#9a6c3a,#6e4b26);border:2px solid #5e3f20;border-top:0;border-radius:0 0 6px 6px}
+/* 손그림 표지판: 그림 자체에 나무틀이 있어 액자를 덧대지 않는다 */
+.signpost.pic{display:block}
+.signpost.pic img{display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 14px 40px #0b1f33aa,0 0 0 3px #ffffffcc}
+.signpost.scene{position:absolute;z-index:6;top:50%;left:50%;transform:translate(-50%,-50%);width:min(78%,560px)}
+.signpost.scene.pic{width:min(72%,560px);max-height:70%}
+.signpost.scene.pic img{max-height:100%;width:auto;max-width:100%;margin:0 auto;object-fit:contain}
+.signpost.map{margin:4px auto 0;width:fit-content;max-width:96%}
+.signpost.map.pic{width:min(92%,520px)}
 .signpost.map .pole{height:16px}
-.signpost.gone{opacity:0;pointer-events:none;transform:translateY(-12px)}
-.signpost.scene.gone{transform:rotate(-2deg) translateY(-14px)}
-.sorryBtn{position:absolute;z-index:5;top:11%;left:6%;display:none}
+.signpost.gone{opacity:0;pointer-events:none}
+.signpost.scene.gone{transform:translate(-50%,-56%) scale(.94)}
+.signCount{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);background:#0d2338e0;color:#fff;font-weight:900;font-size:14px;padding:4px 14px;border-radius:999px;white-space:nowrap;box-shadow:0 2px 8px #0006}
+.signpost.map{text-align:center}
+.signpost.map .signCount{position:static;display:inline-block;bottom:auto;left:auto;right:auto;transform:none;margin-top:7px;font-size:13px;padding:3px 11px}
+.sorryBtn{position:absolute;z-index:7;top:50%;left:50%;transform:translate(-50%,-50%);display:none}
 .sorryBtn.on{display:inline-block}
-.mission .sorryBtn{position:static;margin:4px auto}
-.signArea{display:flex;flex-direction:column;align-items:center}
+.mission .sorryBtn{position:static;transform:none;margin:6px auto}
+.signArea{display:flex;flex-direction:column;align-items:center;position:relative}
 .sceneMon{position:absolute;right:6%;bottom:10%;z-index:2;max-height:52%;max-width:40%;object-fit:contain;filter:drop-shadow(3px 9px 6px #15274388);animation:monIn .7s ease-out;transform-origin:bottom center}
 @keyframes monIn{0%{transform:translateY(30px) scale(.6);opacity:0}70%{transform:translateY(-8px) scale(1.05);opacity:1}100%{transform:none;opacity:1}}
 .sceneMon.bounce{animation:monBounce 2.6s ease-in-out infinite .7s}
@@ -103,16 +112,38 @@ button.sign{pointer-events:auto;cursor:pointer}
 .code{width:175px;text-align:center;font-size:30px;letter-spacing:8px;border:3px solid #7bb8d5;border-radius:13px;padding:9px}
 
 /* ---------- 엔딩 ---------- */
-.ending{position:relative;min-height:430px;background:#8bdaf3 url('backgrounds/ending.webp') center/cover;overflow:hidden;border-radius:18px;text-align:center}
-.escape{position:absolute;bottom:52px;left:-24%;width:170px;animation:sail 10s ease-in-out forwards;z-index:2}
-.escape img{width:95px;display:block;margin:0 auto -14px;animation:bob 1.8s ease-in-out infinite;filter:drop-shadow(2px 6px 5px #11355577)}
-.escape .boat{font-size:98px;line-height:1;filter:drop-shadow(0 5px 7px #2347)}
-@keyframes sail{0%{left:-24%}100%{left:104%}}
-.ending .waves{position:absolute;bottom:0;left:0;right:0;font-size:38px;animation:waveslide 5s linear infinite}
-@keyframes waveslide{to{transform:translateX(70px)}}
+.endWrap{position:relative}
+.ending{position:relative;aspect-ratio:16/9;max-height:66vh;background:#07192b;overflow:hidden;border-radius:18px;text-align:center;cursor:pointer;transition:opacity 1.4s ease}
+.endVid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity 1.4s ease,filter 1.4s ease}
+.ending:after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(6,24,42,.42),transparent 34%,transparent 64%,rgba(6,24,42,.5));pointer-events:none}
+.endTitle{position:relative;z-index:2;padding-top:18px;margin:0;color:#fff;font-size:clamp(22px,4.4vw,38px);text-shadow:0 3px 10px #0b2c47,0 1px 0 #3f6f8a;transition:opacity 1.4s ease}
+.endSkip{position:absolute;z-index:2;left:0;right:0;bottom:12px;margin:0;color:#dcecf7;font-size:13px;text-shadow:0 2px 8px #06202f;opacity:.85;transition:opacity .6s}
+.ending.fading{opacity:0;pointer-events:none}
+.ending.fading .endVid{filter:brightness(.2)}
+.ending.gone{display:none}
+.endAfter{opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease;pointer-events:none}
+.endAfter.show{opacity:1;transform:none;pointer-events:auto}
 .footer{font-size:12px;text-align:center;color:#4c7181;padding:13px}
 .progress{height:10px;background:#cddde8;border-radius:20px;overflow:hidden}
 .progress>div{height:100%;background:linear-gradient(90deg,#75d6ad,#ed77b1);transition:.4s}
+
+/* ---------- 비밀 숫자 공개 ---------- */
+.digSheet{max-width:420px}
+.digTop{margin:0;color:#2f6b8e;font-weight:900}
+.digBig{font-family:var(--display,inherit);font-size:clamp(84px,22vw,132px);line-height:1.05;font-weight:900;color:#e34c84;text-shadow:0 5px 0 #ffd9e7,0 10px 24px #e34c8433;margin:4px 0 6px}
+.digWarn{margin:0 0 6px;font-size:17px;color:#9a3d1e;line-height:1.6}
+.digSub{margin:0 0 14px;font-size:13px;color:#6b8392}
+
+/* ---------- 비밀번호 키패드 ---------- */
+.pad{display:flex;flex-direction:column;align-items:center;gap:14px}
+.padBoxes{display:flex;gap:10px}
+.padBox{width:52px;height:64px;border-radius:12px;border:3px dashed #9fc6da;background:#f3fbff;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:900;color:#1f5675}
+.padBox.on{border-style:solid;border-color:#ed6697;background:#fff;color:#bd3e6d}
+.padKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:min(100%,300px)}
+.padKey{padding:15px 0;border:0;border-radius:14px;background:#eaf4fa;color:#1f4f6b;font-size:25px;font-weight:900;box-shadow:0 4px 0 #bcd6e4;cursor:pointer}
+.padKey:active{transform:translateY(3px);box-shadow:0 1px 0 #bcd6e4}
+.padKey.wide{font-size:16px;background:#f3e6ea;color:#92415f;box-shadow:0 4px 0 #dcc3cc}
+.padKey.go{font-size:16px;background:#ed6697;color:#fff;box-shadow:0 4px 0 #b83e72}
 
 /* ---------- 단어 퀴즈 / 잡아먹힘 ---------- */
 .ov{position:fixed;inset:0;background:#10203bcc;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px}
@@ -144,6 +175,8 @@ input.tile:focus{outline:3px solid #ffc9dd;border-style:solid}
  .mapWrap{aspect-ratio:10/8.2}
  .scenePanel{padding:11px 13px}
  .signpost .plank{font-size:14px;padding:10px 18px}
+ .signpost.scene.pic{width:82%;max-height:66%}
+ .signCount{font-size:12px}
  .sign{font-size:9.5px;padding:3px 6px 2px;border-width:2px}
  .sign .em{font-size:1.25em}
 }
@@ -158,6 +191,13 @@ input.tile:focus{outline:3px solid #ffc9dd;border-style:solid}
 /* ==================== 데이터 ==================== */
 const characters=[['치이카와','chiikawa'],['하치와레','hachiware'],['우사기','usagi'],['모몽가','momonga'],['쿠리만쥬','kurimanju'],['랏코','rakko'],['시사','shisa'],['후루혼야','furu']];
 const img=n=>'assets/'+n+'.png';
+/* 캐릭터마다 다른 4자리 비밀코드 (순서: 보석 동굴 → 인어의 호수 → 산호초 → 미로) */
+const CODES=[[3,7,1,9],[5,2,8,4],[9,4,6,2],[1,8,3,7],[6,1,9,5],[2,9,4,8],[8,5,2,6],[4,3,7,1]];
+function digitFor(sceneId){
+ const s=scenes[sceneId];
+ if(!s||s.slot===undefined||state===null)return null;
+ return String(CODES[state.char][s.slot]);
+}
 
 /* 지도 노드 (1000 x 700 좌표계) */
 const nodes={
@@ -232,19 +272,19 @@ const scenes={
   story:'원숭이 괴물이 퀴즈를 냅니다. 동굴의 위치를 영어로 똑바로 말해야 통과!',
   q:'Where is the cave?',
   opts:[['🌴 It\'s next to the palm tree.',0],['🌊 It\'s behind the waterfall.',1],['🏖️ It\'s in front of the beach.',0],['🌉 It\'s under the old bridge.',0],['⛰️ It\'s between the two hills.',0]]},
- cave:{title:'04 · 보석 동굴',bg:'deepcave',monster:'chimera',digit:'7',sign:'"The key is next to the blue crystal."',
-  story:'우는 키메라가 첫 번째 비밀 숫자를 지키고 있어요. 열쇠가 있는 곳을 찾아 주세요.',
+ cave:{title:'04 · 보석 동굴',bg:'deepcave',monster:'elephant',slot:0,sign:'"The key is next to the blue crystal."',
+  story:'코끼리 괴물이 첫 번째 비밀 숫자를 지키고 있어요. 열쇠가 있는 곳을 찾아 주세요.',
   q:'Where is the key?',
   opts:[['🔴 It\'s next to the red crystal.',0],['🟡 It\'s behind the yellow crystal.',0],['🔵 It\'s next to the blue crystal.',1],['🟣 It\'s under the purple crystal.',0],['⚪ It\'s in front of the white crystal.',0]]},
  deepcave:{title:'05 · 동굴의 비밀 통로',bg:'deepcave',tint:1,monster:'mask',sign:'"Go through the door between the two rocks."',
   story:'가면 키메라가 나타났어요! 안전한 문은 하나뿐입니다.',
   q:'Which door is safe?',
   opts:[['🚪 The door between the two rocks.',1],['🚪 The red door next to the fire.',0],['🚪 The door behind the spider web.',0],['🚪 The door under the bats.',0],['🚪 The door in front of the deep hole.',0]]},
- lagoon:{title:'06 · 인어의 호수',bg:'cave',monster:'siren',digit:'2',sign:'"The shell is in front of the small boat."',
+ lagoon:{title:'06 · 인어의 호수',bg:'cave',monster:'siren',slot:1,sign:'"The shell is in front of the small boat."',
   story:'세이렌이 노래로 묻습니다. 두 번째 비밀 숫자는 조개 속에!',
   q:'Where is the shell?',
   opts:[['⛵ It\'s in front of the small boat.',1],['🪨 It\'s under the big rock.',0],['🌳 It\'s behind the tall tree.',0],['🌸 It\'s next to the pink flowers.',0],['🌊 It\'s between the two waterfalls.',0]]},
- reef:{title:'07 · 산호초 선착장',bg:'reef',monster:'anoko',digit:'9',sign:'"Take Turtle Boat Number 3 and get off at the temple."',
+ reef:{title:'07 · 산호초 선착장',bg:'reef',monster:'anoko',slot:2,sign:'"Take Turtle Boat Number 3 and get off at the temple."',
   story:'아노코가 선착장을 지킵니다. 신전까지 가는 방법을 묻고 있어요.\n"How can I get to the temple?"',
   q:'How can you get to the temple?',
   opts:[['🐢 Take Turtle Boat Number 3.',1],['🦈 Take Shark Taxi Number 7.',0],['🐘 Take the Elephant Bus.',0],['🐬 Take Dolphin Subway Line 2.',0],['🦀 Take Crab Train Number 9.',0]]},
@@ -252,8 +292,8 @@ const scenes={
   story:'데카츠요가 신전 입구를 막고 있어요. 숨겨진 문을 찾으세요.',
   q:'Where is the secret door?',
   opts:[['🗿 It\'s between the two statues.',1],['🗿 It\'s behind the left statue.',0],['🌿 It\'s next to the garden.',0],['🏛️ It\'s in front of the temple gate.',0],['🪜 It\'s under the stone stairs.',0]]},
- maze:{title:'09 · 마지막 미로',bg:'maze',monster:'mermaid',digit:'4',sign:'"Turn left. Go straight. Turn right."',
-  story:'인어가 마지막 숫자를 지켜요. 말한 순서대로 움직여야 미로를 통과합니다.',
+ maze:{title:'09 · 마지막 미로',bg:'maze',monster:'siren',slot:3,sign:'"Turn left. Go straight. Turn right."',
+  story:'세이렌이 또 나타났어요! 마지막 숫자를 지키고 있어요. 말한 순서대로 움직여야 미로를 통과합니다.',
   q:'Read the sign. Which way is correct?',
   opts:[['Turn left. Go straight. Turn right.',1],['Turn right. Go straight. Turn left.',0],['Go straight. Turn left. Turn right.',0],['Turn left. Turn right. Go straight.',0],['Go straight. Turn right. Turn left.',0]]},
  gate:{title:'10 · 봉인된 탈출문',bg:'gate',sign:'"Use the four numbers in the order you found them."',
@@ -358,7 +398,7 @@ function render(){
   </div></div>
   <div class="mission">
    <div class="progress"><div style="width:${Math.min(100,state.leg/10*100)}%"></div></div>
-   <div class="signArea">${leg?signpostHTML(leg.clue,'map'):''}<button class="btn sm sorryBtn" id="sorryBtn" onclick="onSorry()">🔁 Sorry? (다시 보기)</button></div>
+   <div class="signArea">${leg?signpostHTML(leg.clue,'map'):''}</div>
    <div class="mClue">
     <div class="actions"><button class="btn alt sm" onclick="toggleHint()">💡 힌트</button>
     <button class="btn alt sm" onclick="if(confirm('캐릭터 선택 화면으로 돌아갈까요? 진행 기록은 저장됩니다.'))home()">🏠 처음</button>
@@ -371,13 +411,16 @@ function render(){
  placeHero(nodes[state.at].x,nodes[state.at].y);
  if(state.phase==='scene'){openScene(state.scene);return}
  if(leg&&leg.auto){autoWalk();return}
- if(leg){
-  if(state.legSeen!==state.leg){state.legSeen=state.leg;state.signSorry=0;store();showSignFor(SIGN_T1)}
-  else{const sg=document.getElementById('signBoard'),sb=document.getElementById('sorryBtn');if(sg&&sb){sg.classList.add('gone');sb.classList.add('on')}}
- }
+ clearTimeout(signTimer);clearInterval(signTick);  // 지도 푯말은 계속 보인다
 }
 function toggleHint(){document.getElementById('hintText').classList.toggle('on')}
-function signpostHTML(text,ctx){return `<div class="signpost ${ctx}" id="signBoard"><div class="plank">📜 ${text}</div><div class="pole"></div></div>`}
+function signpostHTML(text,ctx,pic){
+ // 지도 푯말과 안내용 표지판은 계속 보이므로 남은 시간 표시가 없다
+ const cnt=(ctx==='map'||ctx.indexOf('notimed')>=0)?'':'<span class="signCount" id="signCount"></span>';
+ return pic
+  ? `<div class="signpost ${ctx} pic" id="signBoard">${picIMG(pic)}${cnt}</div>`
+  : `<div class="signpost ${ctx}" id="signBoard"><div class="plank">📜 ${text}</div><div class="pole"></div>${cnt}</div>`;
+}
 
 /* ==================== 걷기 엔진 ==================== */
 function placeHero(x,y){const h=document.getElementById('mapHero');if(h){h.style.left=x/10+'%';h.style.top=y/7+'%'}}
@@ -468,7 +511,7 @@ async function autoWalk(){
 }
 
 /* ==================== 장면 ==================== */
-let signTimer=null;
+let signTimer=null,signTick=null;
 function openScene(id){
  const s=scenes[id];if(!s){toTravel();return}
  setMusic(s.monster?'monster':'calm');
@@ -478,7 +521,7 @@ function openScene(id){
  const ov=document.createElement('div');ov.className='sceneOv';
  ov.innerHTML=`<div class="sceneVis" style="background-image:${s.tint?"linear-gradient(rgba(10,26,58,.55),rgba(10,26,58,.55)),":''}url('backgrounds/${s.bg}.webp')">
    <span class="sceneName">${s.title}</span>
-   ${signpostHTML(PICS[id]?picSVG(id):s.sign,'scene')}
+   ${signpostHTML(s.sign,(s.intro||s.code)?'scene notimed':'scene',PICS[id]?id:null)}
    <button class="btn sm sorryBtn" id="sorryBtn" onclick="onSorry()">🔁 Sorry? (다시 보기)</button>
    ${s.monster?`<img class="sceneMon bounce" src="${img(s.monster)}" alt="몬스터">`:''}
    <img class="sceneHero in" src="${heroImg()}" alt="${characters[state.char][0]}">
@@ -487,28 +530,38 @@ function openScene(id){
    <div class="story">${s.story}</div>
    ${s.q?`<div class="sceneQ">🎯 ${s.q}</div>`:''}
    <div class="options" id="options">${
-    s.code?`<div style="text-align:center"><input id="secret" class="code" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" aria-label="비밀코드"> <button class="btn" onclick="unlock()">🔓 비밀문 열기</button></div>`
+    s.code?keypadHTML()
     :s.intro?`<button class="btn" onclick="toTravel()">🗺️ 지도를 보고 출발! ➜</button>`
     :curOpts.map((o,i)=>`<button class="option" onclick="pick(${i})">${String.fromCharCode(65+i)}. ${o[0]}</button>`).join('')
    }</div>
    <div id="feedback" class="feedback" role="status"></div>
-   <div class="story" style="font-size:13px;color:#56707f">🎒 획득한 숫자: ${state.digits.length?state.digits.map(x=>'🔹 '+x).join(' '):'아직 없음'} · 길을 잘못 골라도 다시 도전할 수 있어요.</div>
+   <div class="story" style="font-size:13px;color:#56707f">🔑 비밀 숫자 ${state.digits.length}/4 · 얻은 숫자는 <b>한 번만</b> 보여 줘요. 종이에 꼭 적어 두세요! · 길을 잘못 골라도 다시 도전할 수 있어요.</div>
   </div>`;
  root.appendChild(ov);
  window.scrollTo(0,0);
  const heroEl=ov.querySelector('.sceneHero');
  heroEl.addEventListener('animationend',()=>{heroEl.classList.remove('in');heroEl.classList.add('stay')},{once:true});
  locked=false;
- clearTimeout(signTimer);
+ clearTimeout(signTimer);clearInterval(signTick);
+ const cEl=document.getElementById('signCount');if(cEl)cEl.textContent='';
  if(!s.intro&&!s.code){state.signSorry=0;store();showSignFor(SIGN_T1)}
 }
-const SIGN_T1=7000,SIGN_T2=5000,SIGN_T3=7000;
+const SIGN_T1=5000,SIGN_T2=3000,SIGN_T3=5000;
 function showSignFor(ms){
  const sg=document.getElementById('signBoard'),sb=document.getElementById('sorryBtn');
  if(!sg||!sb)return;
  sg.classList.remove('gone');sb.classList.remove('on');
- clearTimeout(signTimer);
- signTimer=setTimeout(()=>{const g=document.getElementById('signBoard'),b=document.getElementById('sorryBtn');if(g&&b){g.classList.add('gone');b.classList.add('on');b.textContent=(state&&state.signSorry>=2)?'🙏 Sorry?… (⚠️ 위험! 또 물어보면 잡아먹혀요)':'🔁 Sorry? (다시 보기)'}},ms/(window.__fast||1));
+ clearTimeout(signTimer);clearInterval(signTick);
+ const fast=(window.__fast||1),end=Date.now()+ms/fast;
+ const cnt=document.getElementById('signCount');
+ const paint=()=>{const c=document.getElementById('signCount');if(c)c.textContent='⏱️ '+Math.max(0,Math.ceil((end-Date.now())*fast/1000))+'초'};
+ paint();signTick=setInterval(paint,200);
+ signTimer=setTimeout(()=>{
+  clearInterval(signTick);
+  const g=document.getElementById('signBoard'),b=document.getElementById('sorryBtn');
+  if(g&&b){g.classList.add('gone');b.classList.add('on');
+   b.textContent=(state&&state.signSorry>=2)?'🙏 Sorry?… (⚠️ 또 물어보면 잡아먹혀요)':'🔁 Sorry? (표지판 다시 보기)'}
+ },ms/fast);
 }
 function feedMsg(txt,ok){const el=document.getElementById('feedback')||document.getElementById('mFeed');if(el){el.className=(el.id==='feedback'?'feedback':'mFeed')+(ok?' ok':'');el.textContent=txt}}
 function pick(i){
@@ -516,19 +569,53 @@ function pick(i){
  const s=scenes[state.scene],fb=document.getElementById('feedback');
  if(!curOpts[i][1]){state.wrong++;hud();store();fb.className='feedback';fb.textContent='⚠️ 틀렸어요! 표지판을 다시 보려면 Sorry? 버튼을 누르세요.';return}
  locked=true;
- if(s.digit&&!state.digits.includes(s.digit))state.digits.push(s.digit);
+ const dg=digitFor(state.scene);
+ if(dg!==null&&state.digits.length===s.slot)state.digits.push(dg);
  hud();
  fb.className='feedback ok';
- fb.textContent=s.digit?`✨ 정답! 비밀 숫자 ${s.digit} 획득!`:'✨ 정답! 길이 열렸어요.';
- if(s.digit){const d=document.createElement('div');d.className='digitFly';d.textContent='🔑'+s.digit;root.appendChild(d);setTimeout(()=>d.remove(),1300)}
+ fb.textContent=dg!==null?`✨ 정답! 비밀 숫자 ${dg} 을(를) 얻었어요. 지금 꼭 적어 두세요!`:'✨ 정답! 길이 열렸어요.';
+ if(dg!==null)showDigit(dg,s.slot);
  const isLast=state.scene==='harbor';
  document.getElementById('options').innerHTML=`<button class="btn" onclick="${isLast?'end()':'nextLeg()'}">${isLast?'⛵ 배에 올라타 탈출하기!':'🗺️ 지도에서 다음 길 찾기 ➜'}</button>`;
  store();
 }
+function showDigit(d,slot){
+ const old=document.getElementById('digOv');if(old)old.remove();
+ const ov=document.createElement('div');ov.className='ov digOv';ov.id='digOv';
+ ov.innerHTML=`<div class="sheet digSheet">
+   <p class="digTop">${slot+1}번째 비밀 숫자</p>
+   <div class="digBig">${d}</div>
+   <p class="digWarn">✏️ 지금 종이에 적어 두세요!<br><b>이 숫자는 다시 보여 주지 않아요.</b></p>
+   <p class="digSub">네 숫자를 모두 모으면 탈출문이 열려요. (${slot+1}/4)</p>
+   <button class="btn" onclick="closeDigit()">적었어요!</button>
+  </div>`;
+ document.body.appendChild(ov);
+}
+function closeDigit(){const o=document.getElementById('digOv');if(o)o.remove()}
+let padIn=[];
+function keypadHTML(){
+ padIn=[];
+ return `<div class="pad">
+  <div class="padBoxes" id="padBoxes">${[0,1,2,3].map(i=>`<span class="padBox" id="pb${i}"></span>`).join('')}</div>
+  <div class="padKeys">${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="padKey" onclick="padPress(${n})">${n}</button>`).join('')}
+   <button class="padKey wide" onclick="padClear()">지우기</button>
+   <button class="padKey" onclick="padPress(0)">0</button>
+   <button class="padKey go" onclick="unlock()">🔓 열기</button></div></div>`;
+}
+function padPaint(){
+ for(let i=0;i<4;i++){const b=document.getElementById('pb'+i);if(b){b.textContent=padIn[i]!==undefined?padIn[i]:'';b.classList.toggle('on',padIn[i]!==undefined)}}
+}
+function padPress(n){
+ if(padIn.length>=4)return;
+ padIn.push(n);padPaint();
+ const fb=document.getElementById('feedback');if(fb){fb.className='feedback';fb.textContent=''}
+}
+function padClear(){padIn=[];padPaint();const fb=document.getElementById('feedback');if(fb){fb.className='feedback';fb.textContent=''}}
 function unlock(){
- const v=document.getElementById('secret').value.replace(/\D/g,''),fb=document.getElementById('feedback');
+ const v=padIn.join(''),fb=document.getElementById('feedback');
  if(state.digits.length<4){fb.className='feedback';fb.textContent='🔒 아직 숫자 4개를 다 모으지 못했어요!';return}
- if(v!==state.digits.join('')){state.wrong++;hud();store();fb.className='feedback';fb.textContent='🔒 코드가 틀렸어요. 숫자를 얻은 순서대로!';return}
+ if(v.length<4){fb.className='feedback';fb.textContent='🔢 숫자 4개를 모두 눌러 주세요.';return}
+ if(v!==state.digits.join('')){state.wrong++;hud();store();padClear();fb.className='feedback';fb.textContent='🔒 코드가 틀렸어요. 적어 둔 숫자를 순서대로 눌러 보세요.';return}
  fb.className='feedback ok';fb.textContent='🔓 문이 열렸습니다!';
  document.getElementById('options').innerHTML=`<button class="btn" onclick="nextLeg()">🚪 열린 문으로 나가기 ➜</button>`;
  store();
@@ -541,83 +628,53 @@ function toTravel(){state.phase='travel';store();render()}
 /* ==================== 엔딩 ==================== */
 function end(){state.finished=true;store();ending()}
 
+let endDone=false,endTimer=null;
+function endFade(){
+ if(endDone)return;endDone=true;
+ clearTimeout(endTimer);
+ const st=document.getElementById('endStage'),af=document.getElementById('endAfter');
+ if(!st||!af)return;
+ st.classList.add('fading');
+ setTimeout(()=>{const s=document.getElementById('endStage');if(s)s.classList.add('gone')},1500);
+ setTimeout(()=>{const a=document.getElementById('endAfter');if(a){a.classList.add('show');window.scrollTo({top:0,behavior:'smooth'})}},900);
+}
 function ending(){
  setMusic('ending');
+ endDone=false;clearTimeout(endTimer);
  const rescued=eatenList().length;saveEaten([]);
  const t=Math.max(1,Math.round((Date.now()-state.started)/1000));
  counter.textContent='🎉 탈출 성공';
- root.innerHTML=`<div class="intro"><h1 class="title">🎉 인어섬 탈출 성공!</h1>
-  <div class="ending"><h2 style="position:relative;z-index:3;padding-top:22px;color:#fff;text-shadow:2px 3px #45768b">${characters[state.char][0]}의 대탈출!</h2>
-   <div class="escape"><img src="${heroImg()}" alt="주인공"><div class="boat">⛵</div></div>
-   <div class="waves">🌊 🌊 🌊 🌊 🌊 🌊 🌊</div></div>
-  <p class="subtitle">영어 표지판을 모두 읽어내고 비밀의 문을 열어 섬을 탈출했어요!${rescued?'<br>🍣➜🐾 초밥이 되었던 친구 '+rescued+'명도 모두 구출했어요!':''}<br>
-  ⏱️ ${Math.floor(t/60)}분 ${t%60}초 · 🧭 ${state.moves}회 이동 · ❌ 잘못 든 길/오답 ${state.wrong}회 · 🔑 비밀코드 ${state.digits.join('')}</p>
-  <div class="actions" style="justify-content:center"><button class="btn" onclick="localStorage.removeItem(SAVE);home()">다른 캐릭터로 다시 하기</button><button class="btn alt" onclick="window.print()">🖨️ 결과 인쇄</button></div></div>`;
+ root.innerHTML=`<div class="intro endWrap">
+  <div class="ending" id="endStage" onclick="endFade()">
+   <video class="endVid" id="endVid" autoplay muted playsinline preload="auto" aria-label="배를 타고 섬을 떠나는 장면"><source src="video/ending_sail.webm" type="video/webm"><source src="video/ending_sail.mp4" type="video/mp4"></video>
+   <h2 class="endTitle">${characters[state.char][0]}의 대탈출!</h2>
+   <p class="endSkip">화면을 누르면 바로 결과를 볼 수 있어요</p></div>
+  <div class="endAfter" id="endAfter">
+   <h1 class="title">🎉 인어섬 탈출 성공!</h1>
+   <p class="subtitle">영어 표지판을 모두 읽어내고 비밀의 문을 열어 섬을 탈출했어요!${rescued?'<br>🍣➜🐾 초밥이 되었던 친구 '+rescued+'명도 모두 구출했어요!':''}<br>
+   ⏱️ ${Math.floor(t/60)}분 ${t%60}초 · 🧭 ${state.moves}회 이동 · ❌ 잘못 든 길/오답 ${state.wrong}회 · 🔑 비밀코드 ${state.digits.join('')}</p>
+   <p class="subtitle" style="font-size:13px;color:#7b94a3">비밀코드는 캐릭터마다 달라요. 다른 친구로 하면 새 숫자를 모아야 해요!</p>
+   <div class="actions" style="justify-content:center"><button class="btn" onclick="localStorage.removeItem(SAVE);home()">🔄 다른 캐릭터로 다시 하기</button><button class="btn alt" onclick="window.print()">🖨️ 결과 인쇄</button></div>
+  </div></div>`;
+ const v=document.getElementById('endVid');
+ if(v){v.addEventListener('ended',endFade,{once:true});v.play().catch(()=>{})}
+ // 영상이 없거나 재생되지 않아도 결과로 넘어가도록 보조 타이머
+ endTimer=setTimeout(endFade,10000/(window.__fast||1));
 }
 
-/* ==================== 그림 표지판 ==================== */
-const P0=`<rect x="4" y="4" width="292" height="132" rx="12" fill="#fdf2d8" stroke="#caa36a" stroke-width="3"/>`;
-const mark=(x,y,x0,y0)=>`<path d="M${x0},${y0} Q${(x+x0)/2},${Math.min(y,y0)-26} ${x},${y}" fill="none" stroke="#e8473c" stroke-width="5" stroke-linecap="round"/><path d="M${x},${y} l-6,-14 l14,-3 z" fill="#e8473c"/>`;
-const em=(x,y,s,e)=>`<text x="${x}" y="${y}" font-size="${s}" text-anchor="middle">${e}</text>`;
-const PICS={
-forest:`${P0}
- <g><rect x="96" y="52" width="7" height="58" fill="#777"/>
-  <g transform="rotate(-8 100 62)"><rect x="66" y="52" width="66" height="20" rx="5" fill="#e9dbb8" stroke="#8d6b3f" stroke-width="3"/><path d="M66,62 l-12,0 m4,-5 l-6,5 l6,5" stroke="#8d6b3f" stroke-width="3" fill="none"/></g>
-  <g transform="rotate(6 100 88)"><rect x="70" y="78" width="62" height="20" rx="5" fill="#e9dbb8" stroke="#8d6b3f" stroke-width="3"/><path d="M132,88 l12,0 m-4,-5 l6,5 l-6,5" stroke="#8d6b3f" stroke-width="3" fill="none"/></g></g>
- <rect x="138" y="62" width="26" height="56" rx="8" fill="#8a5a2e"/>
- <circle cx="152" cy="48" r="40" fill="#3f9d4e"/><circle cx="120" cy="62" r="24" fill="#4db05e"/><circle cx="186" cy="60" r="26" fill="#4db05e"/>
- ${em(252,100,34,'🌼')}${em(220,126,26,'🍄')}
- ${mark(108,44,46,22)}`,
-crossroads:`${P0}
- <path d="M100,118 a50,46 0 0 1 100,0 z" fill="#23232f"/>
- <path d="M121,118 a29,26 0 0 1 58,0 z" fill="#000"/>
- <rect x="96" y="30" width="108" height="12" rx="5" fill="#8a8f98"/><rect x="92" y="26" width="116" height="8" rx="4" fill="#a8adb5"/>
- <rect x="128" y="40" width="44" height="78" fill="#a5dcf2" opacity=".78"/>
- <path d="M136,44 v70 M150,44 v72 M164,44 v70" stroke="#fff" stroke-width="5" opacity=".92" stroke-linecap="round"/>
- <path d="M120,118 q30,10 60,0" stroke="#dff3fb" stroke-width="6" fill="none" stroke-linecap="round"/>
- ${em(52,110,40,'🌴')}${em(254,110,34,'🏖️')}
- ${mark(112,92,50,36)}`,
-cave:`${P0}
- <polygon points="60,110 42,78 60,46 78,78" fill="#e8473c" stroke="#9c2b22" stroke-width="3"/>
- <polygon points="150,112 130,76 150,40 170,76" fill="#f2b705" stroke="#a97d12" stroke-width="3"/>
- <polygon points="236,112 216,76 236,40 256,76" fill="#2f9be6" stroke="#1c6ba8" stroke-width="3"/>
- ${em(272,104,34,'🗝️')}${em(258,46,20,'✨')}
- ${mark(266,74,208,20)}`,
-deepcave:`${P0}
- ${em(40,96,30,'🔥')}<rect x="52" y="62" width="24" height="52" rx="5" fill="#c0392b" stroke="#7e241b" stroke-width="3"/>
- <ellipse cx="118" cy="98" rx="30" ry="26" fill="#9aa0a8"/><ellipse cx="212" cy="98" rx="30" ry="26" fill="#8d939b"/>
- <rect x="148" y="56" width="34" height="62" rx="9" fill="#9c6b3a" stroke="#6e4b26" stroke-width="3"/><circle cx="176" cy="88" r="3.5" fill="#3d2a16"/>
- ${em(258,110,30,'🕸️')}
- ${mark(165,48,96,20)}`,
-lagoon:`${P0}
- ${em(58,96,34,'🪨')}${em(250,92,38,'🌳')}
- <path d="M96,112 q54,16 108,0 l0,10 q-54,14 -108,0 z" fill="#8fd4ea"/>
- ${em(156,88,50,'⛵')}
- ${em(132,126,38,'🐚')}
- ${mark(126,104,210,30)}`,
-reef:`${P0}
- ${em(88,96,54,'🐢')}
- <rect x="108" y="22" width="5" height="40" fill="#6e4b26"/><rect x="113" y="24" width="34" height="24" rx="4" fill="#fff" stroke="#c99c67" stroke-width="2.5"/><text x="130" y="42" font-size="19" font-weight="bold" text-anchor="middle" fill="#1c6ba8">3</text>
- <path d="M150,84 h56 m-12,-9 l14,9 l-14,9" stroke="#49708a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
- ${em(248,100,46,'🏛️')}`,
-temple:`${P0}
- ${em(74,102,48,'🗿')}${em(226,102,48,'🗿')}
- <rect x="132" y="52" width="36" height="62" rx="9" fill="#ffd978" stroke="#c7922a" stroke-width="3.5"/><circle cx="160" cy="86" r="3.5" fill="#8a6134"/>
- ${em(150,40,22,'✨')}
- ${mark(150,46,222,20)}`,
-maze:`${P0}
- <path d="M96,72 h-44 m14,-13 l-16,13 l16,13" stroke="#2f6b8e" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
- <path d="M150,92 v-44 m-13,14 l13,-16 l13,16" stroke="#2f6b8e" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
- <path d="M204,72 h44 m-14,-13 l16,13 l-16,13" stroke="#2f6b8e" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
- <circle cx="72" cy="112" r="13" fill="#e8473c"/><text x="72" y="118" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle">1</text>
- <circle cx="150" cy="112" r="13" fill="#f2a705"/><text x="150" y="118" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle">2</text>
- <circle cx="228" cy="112" r="13" fill="#3daa4f"/><text x="228" y="118" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle">3</text>`,
-harbor:`${P0}
- ${em(70,92,48,'⛵')}
- <path d="M112,78 h64 m-13,-10 l15,10 l-15,10" stroke="#49708a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
- ${em(234,94,46,'🏫')}${em(268,52,22,'🏠')}`
-};
-function picSVG(id){return `<svg viewBox="0 0 300 140" width="290" role="img" aria-label="그림 단서" style="display:block;max-width:100%;height:auto">${PICS[id]}</svg>`}
+/* ==================== 그림 표지판 (손그림 이미지) ==================== */
+const PICS={forest:1,crossroads:1,cave:1,deepcave:1,lagoon:1,reef:1,temple:1,maze:1,harbor:1};
+const SIGN_ALT={
+ forest:'큰 나무 뒤를 가리키는 화살표가 그려진 표지판',
+ crossroads:'폭포 뒤 동굴을 가리키는 화살표가 그려진 표지판',
+ cave:'파란 수정 옆에 열쇠가 놓인 그림 표지판',
+ deepcave:'두 바위 사이에 문이 있는 그림 표지판',
+ lagoon:'작은 배 앞에 조개가 놓인 그림 표지판',
+ reef:'1·2·3번 거북이 배 중 3번이 신전으로 가는 그림 표지판',
+ temple:'두 석상 사이에 문이 있는 그림 표지판',
+ maze:'1 왼쪽, 2 직진, 3 오른쪽 화살표가 그려진 표지판',
+ harbor:'배를 타고 바다 건너 학교로 가는 그림 표지판'};
+function picIMG(id){return `<img src="signs/${id}.webp" alt="${SIGN_ALT[id]||'그림 단서'}" draggable="false">`}
 
 /* ==================== Sorry 단어 퀴즈 / 잡아먹힘 ==================== */
 const EATEN='chiikawaEatenV5';
